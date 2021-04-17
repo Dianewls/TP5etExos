@@ -4,22 +4,22 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class MonRecyclerViewAdapter extends RecyclerView.Adapter<MonRecyclerViewAdapter.ConteneurDeDonnee>{
-    private ArrayList<Donnee> donnees;
+    private ArrayList<Planete> planetes;
     private static DetecteurDeClicSurRecycler detecteurDeClicSurRecycler;
 
 
 
-    public MonRecyclerViewAdapter(ArrayList<Donnee> donnees) {
-        this.donnees = donnees;
+    public MonRecyclerViewAdapter(ArrayList<Planete> planetes) {
+        this.planetes = planetes;
     }
 
 
@@ -34,14 +34,15 @@ public class MonRecyclerViewAdapter extends RecyclerView.Adapter<MonRecyclerView
 
     @Override
     public void onBindViewHolder(ConteneurDeDonnee conteneur, int position) {
-        conteneur.tv_principal.setText(donnees.get(position).getPrincipal());
-        conteneur.tv_auxiliaire.setText(donnees.get(position).getAuxiliaire());
+        conteneur.tv_principal.setText(planetes.get(position).getNom());
+        conteneur.tv_auxiliaire.setText(planetes.get(position).getTaille());
+        conteneur.img.setImageResource(planetes.get(position).getImg());
     }
 
 
     @Override
     public int getItemCount() {
-        return donnees.size();
+        return planetes.size();
 
     }
 
@@ -49,12 +50,16 @@ public class MonRecyclerViewAdapter extends RecyclerView.Adapter<MonRecyclerView
     public static class ConteneurDeDonnee extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tv_principal;
         TextView tv_auxiliaire;
+        ImageView img;
+
 
         public ConteneurDeDonnee(View itemView) {
             super(itemView);
             tv_principal = (TextView) itemView.findViewById(R.id.tv_principal);
             tv_auxiliaire = (TextView) itemView.findViewById(R.id.tv_auxiliaire);
             itemView.setOnClickListener(this);
+            img= itemView.findViewById(R.id.img);
+
 
         }
 
